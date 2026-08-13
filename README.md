@@ -16,6 +16,7 @@
 | **A validator** running a node | [Run a validator](docs/validator.md) | 30 min |
 | **A developer** building an app | [Build on Inazuma](docs/build.md) | 15 min |
 | **Staking INAZ** | [Staking, rewards & slashing](docs/staking.md) | 8 min |
+| **Worried about quantum computers** | [Quantum resistance](docs/quantum.md) | 6 min |
 | **Confused by a word** | [Glossary](docs/glossary.md) | — |
 
 ## All guides
@@ -42,7 +43,8 @@
 
 **Internals**
 - [Architecture](docs/architecture.md) — blocks, consensus, state, networking
-- [Security model](docs/security.md) — threat model, slashing, quantum posture
+- [Security model](docs/security.md) — threat model, slashing, key hygiene
+- [Quantum resistance](docs/quantum.md) — the ML-DSA-65 layer, what is live and what is staged
 
 ## Chain facts
 
@@ -52,7 +54,7 @@
 | Coin | `INAZ`, 9 decimals, smallest unit `rai` |
 | Block time | 400 ms |
 | Minimum fee | 1,000 rai (0.000001 INAZ) |
-| Accounts | Ed25519 keys, base58 addresses |
+| Accounts | Ed25519 keys, base58 addresses, ML-DSA-65 quantum co-signatures |
 | Consensus | stake-weighted leader election with precommit finality |
 | Contracts | WASM |
 | Public RPC | `https://rpc.inazuma.network` · WS `wss://rpc.inazuma.network/ws` |

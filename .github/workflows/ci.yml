@@ -1,0 +1,25 @@
+name: Docs checks
+on:
+  push:
+    branches: [main]
+  pull_request:
+jobs:
+  links:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check relative links resolve
+        run: |
+          fail=0
+          while IFS= read -r file; do
+            grep -oE '\]\((\./)?[A-Za-z0-9_./-]+\.md(#[A-Za-z0-9_-]+)?\)' "$file" |               sed -E 's/^\]\(//; s/\)$//; s/#.*$//' | while read -r link; do
+                target="$(dirname "$file")/$link"
+                if [ ! -f "$target" ]; then echo "broken link in $file -> $link"; exit 1; fi
+              done || fail=1
+          done < <(find . -name '*.md' -not -path './.git/*')
+          exit $fail
+      - name: Reject forbidden references
+        run: |
+          if grep -rniE 'lovable' --include='*.md' .; then
+            echo "remove external tooling references"; exit 1
+          fi
